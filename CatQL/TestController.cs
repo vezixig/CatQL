@@ -3,7 +3,6 @@
 using Core.Models;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 [ApiController]
 [Route("[controller]")]
@@ -22,7 +21,6 @@ public class CatController : ControllerBase
     [HttpGet]
     public IEnumerable<Cat> Get()
     {
-        _dataContext.Database.Migrate();
         _dataContext.Cats.Add(new Cat { Name = "Test", Id = 1 });
         return _dataContext.Cats;
     }
