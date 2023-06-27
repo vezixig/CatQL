@@ -1,16 +1,22 @@
-﻿namespace API.GraphQL.Queries;
+﻿namespace CatQL.Presentation.GraphQL.Queries;
 
+using Application.Requests;
 using Core.Models;
 using global::GraphQL;
 using global::GraphQL.Types;
+using MediatR;
 
 public class CatQuery : ObjectGraphType
 {
-    public CatQuery()
+    private readonly IMediator _mediator;
+
+    public CatQuery(IMediator mediator)
     {
+        _mediator = mediator;
+
         Field<CatType>(
             "cat",
-            arguments: new QueryArguments(
+            arguments: new(
                 new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id" }
             ),
             resolve: context =>
@@ -23,10 +29,7 @@ public class CatQuery : ObjectGraphType
 
     private Cat GetCatById(int id)
     {
-        // Your data retrieval logic here
-        // Replace with your actual implementation
-        // Example implementation:
-        var cat = new Cat { Id = id, Name = "Whiskers", Age = 3 };
-        return cat;
+        var data = _mediator.Send(new GetCatRequest(id));
+        return data.Result;
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Infrastructure;
+﻿namespace CatQL.Infrastructure;
 
 using Core.Models;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +12,6 @@ public class DataContext : DbContext
     {
         var serverVersion = new MySqlServerVersion(new Version(8, 0, 33));
         var connectionString = "server=localhost;user=root;password=#Science21;database=catql";
-
 
         optionsBuilder.UseMySql(connectionString, serverVersion)
             .LogTo(Console.WriteLine, LogLevel.Information)

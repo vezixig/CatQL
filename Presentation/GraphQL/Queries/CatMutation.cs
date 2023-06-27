@@ -1,4 +1,4 @@
-﻿namespace API.GraphQL.Queries;
+﻿namespace CatQL.Presentation.GraphQL.Queries;
 
 using Core.Models;
 using global::GraphQL;
@@ -15,7 +15,7 @@ public class CatMutation : ObjectGraphType
 
         Field<CatType>(
             "addCat",
-            arguments: new QueryArguments(
+            arguments: new(
                 new QueryArgument<NonNullGraphType<CatInputType>> { Name = "cat" }
             ),
             resolve: context =>

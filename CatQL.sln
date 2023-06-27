@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "CatQL\API.csproj", "{239A8549-CC4F-4F61-805A-E00B408C5F03}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Domain\Core.csproj", "{C67D3D0E-537F-4CBD-82C6-A59F3FCA9153}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{76626DCC-F61B-4D89-B022-DD1754BA8E66}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{D214F4E8-CD1F-4160-8A92-F4B12E6A2DF8}"
@@ -17,20 +13,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Pr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{33050ECB-DA31-4FE6-B52B-DF5DEDA6ABAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatrQL", "CatrQL\CatrQL.csproj", "{13E99764-A3B7-42F8-AF79-CACFD5220575}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{A222AA81-7C09-4909-B0EE-F597A4FE6455}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{83666B24-0867-48D0-85D3-BCA03BAF4959}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{239A8549-CC4F-4F61-805A-E00B408C5F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{239A8549-CC4F-4F61-805A-E00B408C5F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{239A8549-CC4F-4F61-805A-E00B408C5F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{239A8549-CC4F-4F61-805A-E00B408C5F03}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C67D3D0E-537F-4CBD-82C6-A59F3FCA9153}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C67D3D0E-537F-4CBD-82C6-A59F3FCA9153}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C67D3D0E-537F-4CBD-82C6-A59F3FCA9153}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C67D3D0E-537F-4CBD-82C6-A59F3FCA9153}.Release|Any CPU.Build.0 = Release|Any CPU
 		{76626DCC-F61B-4D89-B022-DD1754BA8E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{76626DCC-F61B-4D89-B022-DD1754BA8E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76626DCC-F61B-4D89-B022-DD1754BA8E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +33,18 @@ Global
 		{33050ECB-DA31-4FE6-B52B-DF5DEDA6ABAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33050ECB-DA31-4FE6-B52B-DF5DEDA6ABAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33050ECB-DA31-4FE6-B52B-DF5DEDA6ABAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13E99764-A3B7-42F8-AF79-CACFD5220575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13E99764-A3B7-42F8-AF79-CACFD5220575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13E99764-A3B7-42F8-AF79-CACFD5220575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13E99764-A3B7-42F8-AF79-CACFD5220575}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A222AA81-7C09-4909-B0EE-F597A4FE6455}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A222AA81-7C09-4909-B0EE-F597A4FE6455}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A222AA81-7C09-4909-B0EE-F597A4FE6455}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A222AA81-7C09-4909-B0EE-F597A4FE6455}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83666B24-0867-48D0-85D3-BCA03BAF4959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83666B24-0867-48D0-85D3-BCA03BAF4959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83666B24-0867-48D0-85D3-BCA03BAF4959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83666B24-0867-48D0-85D3-BCA03BAF4959}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
