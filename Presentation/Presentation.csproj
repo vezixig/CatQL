@@ -5,6 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>CatQL.Presentation</RootNamespace>
+		<EmitCompilerGeneratedFiles>True</EmitCompilerGeneratedFiles>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -29,7 +30,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Application\Application.csproj" />
 		<ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
-		<ProjectReference Include="..\SourceCodeGenerators\SourceCodeGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
 	</ItemGroup>
 
 </Project>
