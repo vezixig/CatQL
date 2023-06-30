@@ -1,5 +1,8 @@
 ﻿namespace SourceCodeGenerator.Generators
 {
+    using System.Reflection;
+    using Attributes;
+    using Enums;
     using Interfaces;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
@@ -10,6 +13,11 @@
     {
         public void Generate(Type sourceClassType)
         {
+            //if (sourceClassType.GetCustomAttribute(typeof(GenerateSchemaAttribute)) is not GenerateSchemaAttribute generatorAttribute) return;
+
+            var generateAttribute = sourceClassType.GetCustomAttribute<GenerateSchemaAttribute>();
+            if (generateAttribute == null) return;
+
             var sourceClassName = sourceClassType.Name;
             var schemaName = sourceClassName + "Schema";
 
@@ -55,6 +63,7 @@
 
             // Create a constructor declaration
             var constructorDocumentation = SyntaxFactory.Comment($"/// <summary>Initializes a new instance of the <see cref=\"{schemaName}\"/> class.</summary>");
+            var constructorParameterDocumentation = SyntaxFactory.Comment("/// <param name=\"mediator\">An implementation of <see cref=\"IMediator\"/>.</param>");
             var constructorParameterList = SyntaxFactory.ParameterList(
                 SyntaxFactory.SingletonSeparatedList(
                     SyntaxFactory.Parameter(SyntaxFactory.Identifier("mediator"))
@@ -62,13 +71,26 @@
             var constructorDeclaration = SyntaxFactory.ConstructorDeclaration(schemaName)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .WithBody(SyntaxFactory.Block())
-                .WithLeadingTrivia(SyntaxFactory.TriviaList(constructorDocumentation, SyntaxFactory.CarriageReturnLineFeed))
+                .WithLeadingTrivia(
+                    SyntaxFactory.TriviaList(
+                        constructorDocumentation,
+                        SyntaxFactory.CarriageReturnLineFeed,
+                        constructorParameterDocumentation,
+                        SyntaxFactory.CarriageReturnLineFeed))
                 .WithParameterList(constructorParameterList);
 
             // Add statements to the constructor body
-            var queryStatement = SyntaxFactory.ParseStatement($"Query = new {sourceClassName}Query(mediator);").WithTrailingTrivia(lineFeedTrivia);
-            var mutatorStatement = SyntaxFactory.ParseStatement($"Mutation = new {sourceClassName}Mutation(mediator);");
-            constructorDeclaration = constructorDeclaration.AddBodyStatements(queryStatement, mutatorStatement);
+            if (generateAttribute.Options.HasFlag(SchemaOptions.Query))
+            {
+                var queryStatement = SyntaxFactory.ParseStatement($"Query = new {sourceClassName}Query(mediator);").WithTrailingTrivia(lineFeedTrivia);
+                constructorDeclaration = constructorDeclaration.AddBodyStatements(queryStatement);
+            }
+
+            if (generateAttribute.Options.HasFlag(SchemaOptions.Mutation))
+            {
+                var mutatorStatement = SyntaxFactory.ParseStatement($"Mutation = new {sourceClassName}Mutation(mediator);");
+                constructorDeclaration = constructorDeclaration.AddBodyStatements(mutatorStatement);
+            }
 
             // Add the constructor declaration to the class declaration
             classDeclaration = classDeclaration.AddMembers(constructorDeclaration);
@@ -84,16 +106,16 @@
             var syntaxTree2 = CSharpSyntaxTree.Create(compilationUnit);
 
             // Get the root of the syntax tree
-            var root2 = syntaxTree2.GetRoot();
+            var resultRoot = syntaxTree2.GetRoot();
 
             // Format the syntax tree
-            var formattedRoot = Formatter.Format(root2, new AdhocWorkspace());
-            var fileContent2 = formattedRoot.ToFullString();
+            var formattedRoot = Formatter.Format(resultRoot, new AdhocWorkspace());
+            var fileContent = formattedRoot.ToFullString();
 
             // Write to file
             var filePath = $"../../../../Presentation/GraphQL/Schema/{schemaName}.cs";
             File.Create(filePath).Dispose();
-            File.WriteAllText(filePath, fileContent2);
+            File.WriteAllText(filePath, fileContent);
         }
     }
 }

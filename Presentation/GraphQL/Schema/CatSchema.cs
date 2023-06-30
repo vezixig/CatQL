@@ -15,11 +15,10 @@ namespace CatQL.Presentation.GraphQL.Schema
     /// <summary>GraphQL Schema for <see cref="Cat"/></summary>
     public class CatSchema : Schema
     {
-        /// <summary>Initializes a new instance of the <see cref="CatSchema"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="CatSchema"/> class.</summary>/// <param name="mediator">An implementation of <see cref="IMediator"/>.</param>
         public CatSchema(IMediator mediator)
         {
             Query = new CatQuery(mediator);
-            Mutation = new CatMutation(mediator);
         }
     }
 }

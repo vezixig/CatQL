@@ -21,8 +21,16 @@ public class CatQuery : ObjectGraphType
             ),
             resolve: context =>
             {
-                var id = context.GetArgument<int>("id");
-                return GetCatById(id);
+                try
+                {
+                    var id = context.GetArgument<int>("id");
+                    return GetCatById(id);
+                }
+                catch (Exception e)
+                {
+                    context.Errors.Add(new(e.Message));
+                    return null;
+                }
             }
         );
     }

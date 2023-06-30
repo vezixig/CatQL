@@ -1,11 +1,11 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
-using CatQL.Core.Attributes;
+using SourceCodeGenerator.Attributes;
 using SourceCodeGenerator.Generators;
 
 if (!Debugger.IsAttached) Debugger.Launch();
 
-var coreAssembly = Assembly.Load("Core");
+var coreAssembly = Assembly.LoadFrom("../../../../Core/bin/Debug/net7.0/Core.dll");
 
 foreach (var assemblyClass in coreAssembly.GetTypes())
 {

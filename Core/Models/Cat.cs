@@ -2,9 +2,10 @@
 
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Attributes;
+using SourceCodeGenerator.Attributes;
+using SourceCodeGenerator.Enums;
 
-[GenerateSchema]
+[GenerateSchema(SchemaOptions.Query | SchemaOptions.Mutation)]
 public class Cat
 {
     [Output]
