@@ -4,16 +4,15 @@ using Core.Models;
 using global::GraphQL;
 using global::GraphQL.Types;
 using Infrastructure;
+using MediatR;
 
 public class CatMutation : ObjectGraphType
 {
     private readonly DataContext _dataContext;
 
-    public CatMutation(DataContext dataContext)
-    {
-        _dataContext = dataContext;
-
-        Field<CatType>(
+    public CatMutation(IMediator mediator)
+        //_dataContext = dataContext;
+        => Field<CatType>(
             "addCat",
             arguments: new(
                 new QueryArgument<NonNullGraphType<CatInputType>> { Name = "cat" }
@@ -24,12 +23,9 @@ public class CatMutation : ObjectGraphType
                 return AddCat(cat);
             }
         );
-    }
 
     private Cat AddCat(Cat cat)
-    {
-        _dataContext.Cats.Add(cat);
-        _dataContext.SaveChanges();
-        return cat;
-    }
+        //_dataContext.Cats.Add(cat);
+        //_dataContext.SaveChanges();
+        => cat;
 }

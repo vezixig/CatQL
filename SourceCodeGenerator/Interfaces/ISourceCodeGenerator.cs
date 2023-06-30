@@ -2,6 +2,6 @@
 {
     internal interface ISourceCodeGenerator
     {
-        public void Generate();
+        public void Generate(Type sourceClassType);
     }
 }
