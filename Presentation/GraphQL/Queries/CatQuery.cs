@@ -5,6 +5,7 @@ using Core.Models;
 using global::GraphQL;
 using global::GraphQL.Types;
 using MediatR;
+using Types;
 
 public class CatQuery : ObjectGraphType
 {
@@ -14,9 +15,9 @@ public class CatQuery : ObjectGraphType
     {
         _mediator = mediator;
 
-        Field<CatType>(
+        Field<CatOutputType>(
             "cat",
-            arguments: new(
+            arguments: new QueryArguments(
                 new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id" }
             ),
             resolve: context =>
@@ -28,7 +29,7 @@ public class CatQuery : ObjectGraphType
                 }
                 catch (Exception e)
                 {
-                    context.Errors.Add(new(e.Message));
+                    context.Errors.Add(new ExecutionError(e.Message));
                     return null;
                 }
             }

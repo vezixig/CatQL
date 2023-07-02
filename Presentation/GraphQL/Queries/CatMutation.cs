@@ -5,6 +5,7 @@ using global::GraphQL;
 using global::GraphQL.Types;
 using Infrastructure;
 using MediatR;
+using Types;
 
 public class CatMutation : ObjectGraphType
 {
@@ -12,9 +13,9 @@ public class CatMutation : ObjectGraphType
 
     public CatMutation(IMediator mediator)
         //_dataContext = dataContext;
-        => Field<CatType>(
+        => Field<CatOutputType>(
             "addCat",
-            arguments: new(
+            arguments: new QueryArguments(
                 new QueryArgument<NonNullGraphType<CatInputType>> { Name = "cat" }
             ),
             resolve: context =>

@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="GraphQL" Version="7.5.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Features" Version="4.6.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Features" Version="4.6.0" />
   </ItemGroup>

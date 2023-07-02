@@ -1,8 +1,9 @@
 ﻿namespace CatQL.Presentation.GraphQL;
 
+using Core.Models;
 using global::GraphQL.Types;
 
-public sealed class CatInputType : InputObjectGraphType
+public sealed class CatInputType : InputObjectGraphType<Cat>
 {
     /// <summary>Initializes a new instance of the <see cref="CatInputType" /> class.</summary>
     public CatInputType()

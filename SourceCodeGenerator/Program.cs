@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
 using SourceCodeGenerator.Attributes;
+using SourceCodeGenerator.Enums;
 using SourceCodeGenerator.Generators;
 
 if (!Debugger.IsAttached) Debugger.Launch();
@@ -18,11 +19,19 @@ foreach (var assemblyClass in coreAssembly.GetTypes())
     var schemaGenerator = new SchemaGenerator();
     schemaGenerator.Generate(assemblyClass);
 
-    Console.WriteLine("\tGenerating type...");
-    // todo
+    if (assemblyClass.GetCustomAttribute<GenerateSchemaAttribute>()?.Options.HasFlag(SchemaOptions.Query) == true)
+    {
+        Console.WriteLine("\tGenerating output type...");
+        var typeGenerator = new OutputTypeGenerator();
+        typeGenerator.Generate(assemblyClass);
+    }
 
-    Console.WriteLine("\tGenerating input type...");
-    // todo
+    if (assemblyClass.GetCustomAttribute<GenerateSchemaAttribute>()?.Options.HasFlag(SchemaOptions.Mutation) == true)
+    {
+        Console.WriteLine("\tGenerating input type...");
+        var inputTypeGenerator = new InputTypeGenerator();
+        inputTypeGenerator.Generate(assemblyClass);
+    }
 
     Console.WriteLine("\tGenerating query...");
     // todo
