@@ -21,7 +21,7 @@ Big thanks to all the developers and supporters of this projects!
 ### EF Core migrations and updating the database
 To create a new migration file based on the C# models, run the following command in a terminal window from the solution folder:
 
-    dotnet ef migration add InitialMigration --project Infrastructure
+    dotnet ef migrations add InitialMigration --project Infrastructure
 Afterward, update the database with the migration using the following command:
 
     dotnet ef database update --project Infrastructure
