@@ -10,18 +10,20 @@ namespace CatQL.Presentation.GraphQL.Schema
     using global::GraphQL.Types;
     using Core.Models;
     using MediatR;
-    using Mutations;
-    using Queries;
+    using global::GraphQL;
+    using Types;
 
     /// <summary>GraphQL Schema for <see cref="Cat"/></summary>
-    public class CatSchema : Schema
+    public class Schema : global::GraphQL.Types.Schema
     {
-        /// <summary>Initializes a new instance of the <see cref="CatSchema"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="Schema"/> class.</summary>
         /// <param name="mediator">An implementation of <see cref="IMediator"/>.</param>
-        public CatSchema(IMediator mediator)
+        public Schema(IMediator mediator)
         {
-            Query = new CatQuery(mediator);
-            Mutation = new CatMutation(mediator);
+            this.RegisterTypeMapping<Breed, BreedOutputType>();
+
+            Query = new Queries(mediator);
+            Mutation = new Mutations(mediator);
         }
     }
 }

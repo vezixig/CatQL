@@ -4,9 +4,11 @@ using Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-public class DataContext : DbContext
+internal class DataContext : DbContext
 {
     public DbSet<Cat> Cats { get; set; }
+
+    public DbSet<Breed> Breeds { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -25,6 +27,14 @@ public class DataContext : DbContext
             .Property(b => b.Id)
             .IsRequired();
         modelBuilder.Entity<Cat>()
+            .Property(b => b.Name)
+            .IsRequired()
+            .HasMaxLength(150);
+
+        modelBuilder.Entity<Breed>()
+            .Property(b => b.Id)
+            .IsRequired();
+        modelBuilder.Entity<Breed>()
             .Property(b => b.Name)
             .IsRequired()
             .HasMaxLength(150);

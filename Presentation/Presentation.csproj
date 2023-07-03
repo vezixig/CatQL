@@ -33,8 +33,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="GraphQL\Mutations\" />
-	  <Folder Include="GraphQL\Schema\" />
 	  <Folder Include="GraphQL\Types\" />
 	</ItemGroup>
 

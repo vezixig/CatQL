@@ -1,6 +1,10 @@
-﻿namespace CatQL.Infrastructure.Repositories.Interfaces
+﻿namespace CatQL.Infrastructure.Repositories.Interfaces;
+
+using Core.Models;
+
+public interface ICatRepository
 {
-    internal interface ICatRepository
-    {
-    }
+    public Task<Cat> GetById(int id, CancellationToken cancellationToken);
+
+    public Task<Cat> Create(Cat data, CancellationToken cancellationToken);
 }

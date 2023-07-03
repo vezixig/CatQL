@@ -1,6 +1,5 @@
 ﻿namespace SourceCodeGenerator;
 
-using GraphQL.Types;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SF = Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
@@ -33,9 +32,7 @@ public class CatQlSyntaxFactory
     /// <param name="nameSpaces">The namespaces as string.</param>
     /// <returns>An array of using directives.</returns>
     public static UsingDirectiveSyntax[] CreateUsings(string[] nameSpaces)
-    {
-        return nameSpaces.Select(o => SF.UsingDirective(SF.ParseName(o))).ToArray();
-    }
+        => nameSpaces.Select(o => SF.UsingDirective(SF.ParseName(o))).ToArray();
 
     /// <summary>Returns a base type with a generic type argument.</summary>
     /// <param name="type">The name of the base class type.</param>
@@ -46,7 +43,7 @@ public class CatQlSyntaxFactory
         var baseClassTypeParameter = SF.TypeParameter(SF.Identifier(typeParameter));
         var baseClassTypeArguments = SF.TypeArgumentList(SF.SingletonSeparatedList<TypeSyntax>(SF.IdentifierName(baseClassTypeParameter.Identifier)));
         return SF.SimpleBaseType(
-            SF.GenericName(SF.Identifier(nameof(ObjectGraphType)))
+            SF.GenericName(SF.Identifier(type))
                 .WithTypeArgumentList(baseClassTypeArguments));
     }
 }

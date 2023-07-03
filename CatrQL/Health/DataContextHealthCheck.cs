@@ -6,15 +6,10 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 public class DataContextHealthCheck : IHealthCheck
 {
-    private readonly DataContext _dataContext;
-
     private readonly IMediator _mediator;
 
-    public DataContextHealthCheck(IMediator mediator, DataContext dataContext)
-    {
-        _mediator = mediator;
-        _dataContext = dataContext;
-    }
+    public DataContextHealthCheck(IMediator mediator)
+        => _mediator = mediator;
 
 
     public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = new())

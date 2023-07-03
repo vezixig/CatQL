@@ -1,24 +1,23 @@
-﻿namespace CatQL.Application.Handler
+﻿namespace CatQL.Application.Handler;
+
+using Core.Models;
+using Infrastructure.Repositories.Interfaces;
+using MediatR;
+using Requests;
+
+internal class GetCatHandler : IRequestHandler<GetCatRequest, Cat>
 {
-    using Core.Models;
-    using Infrastructure.Repositories;
-    using MediatR;
-    using Requests;
+    private readonly ICatRepository _catRepository;
 
-    internal class GetCatHandler : IRequestHandler<GetCatRequest, Cat>
+    public GetCatHandler(ICatRepository catRepository)
+        => _catRepository = catRepository;
+
+    public async Task<Cat> Handle(GetCatRequest request, CancellationToken cancellationToken)
     {
-        private readonly CatRepository _catRepository;
+        var cat = await _catRepository.GetById(request.Id, cancellationToken);
 
-        public GetCatHandler(CatRepository catRepository)
-            => _catRepository = catRepository;
+        if (cat == null) throw new KeyNotFoundException($"No cat with the id {request.Id} was found.");
 
-        public async Task<Cat> Handle(GetCatRequest request, CancellationToken cancellationToken)
-        {
-            var cat = await _catRepository.GetCatByIdAsync(request.Id, cancellationToken);
-
-            if (cat == null) throw new KeyNotFoundException($"No cat with the id {request.Id} was found.");
-
-            return cat;
-        }
+        return cat;
     }
 }

@@ -30,10 +30,12 @@ public class Cat
     public string Color { get; set; } = string.Empty;
 
     [Input]
-    [Output]
     public int Weight { get; set; }
 
-    [Input]
     [Output]
+    [Input]
     public DateTime Birthdate { get; set; }
+
+    [Output]
+    public Breed Breed { get; set; }
 }

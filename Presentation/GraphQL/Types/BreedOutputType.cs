@@ -16,6 +16,10 @@ namespace CatQL.Presentation.GraphQL.Types
         /// <summary>Initializes a new instance of the <see cref="BreedOutputType"/> class.</summary>
         public BreedOutputType()
         {
+            Field(o => o.Id).Description("Id");
+            Field(o => o.Name).Description("Name");
+            Field(o => o.Origin).Description("Origin");
+            Field(o => o.Description).Description("Description");
         }
     }
 }

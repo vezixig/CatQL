@@ -20,8 +20,8 @@ namespace CatQL.Presentation.GraphQL.Types
             Field(o => o.Name).Description("The name of the cat");
             Field(o => o.Age).Description("The age of the cat in full years");
             Field(o => o.Color).Description("Color");
-            Field(o => o.Weight).Description("Weight");
             Field(o => o.Birthdate).Description("Birthdate");
+            Field<Breed>(o => o.Breed).Description("Breed");
         }
     }
 }
