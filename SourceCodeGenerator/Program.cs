@@ -8,38 +8,38 @@ if (!Debugger.IsAttached) Debugger.Launch();
 
 var coreAssembly = Assembly.LoadFrom("../../../../Core/bin/Debug/net7.0/Core.dll");
 
+var schemaGenerator = new SchemaGenerator();
+var outputTypeGenerator = new OutputTypeGenerator();
+var queryGenerator = new QueryGenerator();
+var inputTypeGenerator = new InputTypeGenerator();
+var mutationGenerator = new MutationGenerator();
+
 foreach (var assemblyClass in coreAssembly.GetTypes())
 {
     if (assemblyClass.IsClass == false) continue;
-    if (assemblyClass.GetCustomAttributes(typeof(GenerateSchemaAttribute), true).Length == 0) continue;
+    var generateAttribute = assemblyClass.GetCustomAttribute<GenerateSchemaAttribute>();
+    if (generateAttribute == null) continue;
 
     Console.WriteLine($"Generating sources for model class {assemblyClass.FullName}");
 
     Console.WriteLine("\tGenerating schema...");
-    var schemaGenerator = new SchemaGenerator();
     schemaGenerator.Generate(assemblyClass);
 
-    if (assemblyClass.GetCustomAttribute<GenerateSchemaAttribute>()?.Options.HasFlag(SchemaOptions.Query) == true)
+    if (generateAttribute.Options.HasFlag(SchemaOptions.Query))
     {
         Console.WriteLine("\tGenerating output type...");
-        var typeGenerator = new OutputTypeGenerator();
-        typeGenerator.Generate(assemblyClass);
+        outputTypeGenerator.Generate(assemblyClass);
+
+        Console.WriteLine("\tGenerating query...");
+        queryGenerator.Generate(assemblyClass);
     }
 
-    if (assemblyClass.GetCustomAttribute<GenerateSchemaAttribute>()?.Options.HasFlag(SchemaOptions.Mutation) == true)
+    if (generateAttribute.Options.HasFlag(SchemaOptions.Mutation))
     {
         Console.WriteLine("\tGenerating input type...");
-        var inputTypeGenerator = new InputTypeGenerator();
         inputTypeGenerator.Generate(assemblyClass);
+
+        Console.WriteLine("\tGenerating mutation...");
+        mutationGenerator.Generate(assemblyClass);
     }
-
-    Console.WriteLine("\tGenerating query...");
-    // todo
-
-    Console.WriteLine("\tGenerating mutation...");
-    // todo
 }
-
-
-Console.WriteLine("Press RETURN to exit");
-Console.ReadLine();

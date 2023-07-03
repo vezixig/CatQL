@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using SourceCodeGenerator.Attributes;
 using SourceCodeGenerator.Enums;
 
-[GenerateSchema(SchemaOptions.Query | SchemaOptions.Mutation)]
+[GenerateSchema(SchemaOptions.Mutation | SchemaOptions.Query)]
 public class Cat
 {
     [Output]

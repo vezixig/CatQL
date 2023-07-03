@@ -1,12 +1,13 @@
-﻿namespace SourceCodeGenerator.Enums
+﻿namespace SourceCodeGenerator.Enums;
+
+[Flags]
+public enum SchemaOptions
 {
-    [Flags]
-    public enum SchemaOptions
-    {
-        None,
+    None = 0,
 
-        Query,
+    Query = 1,
 
-        Mutation
-    }
+    Mutation = 2,
+
+    Subscription = 4
 }

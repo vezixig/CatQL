@@ -10,6 +10,7 @@ namespace CatQL.Presentation.GraphQL.Schema
     using global::GraphQL.Types;
     using Core.Models;
     using MediatR;
+    using Mutations;
     using Queries;
 
     /// <summary>GraphQL Schema for <see cref="Breed"/></summary>
@@ -19,6 +20,7 @@ namespace CatQL.Presentation.GraphQL.Schema
         /// <param name="mediator">An implementation of <see cref="IMediator"/>.</param>
         public BreedSchema(IMediator mediator)
         {
+            Query = new BreedQuery(mediator);
         }
     }
 }

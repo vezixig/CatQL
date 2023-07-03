@@ -10,6 +10,7 @@ namespace CatQL.Presentation.GraphQL.Schema
     using global::GraphQL.Types;
     using Core.Models;
     using MediatR;
+    using Mutations;
     using Queries;
 
     /// <summary>GraphQL Schema for <see cref="Cat"/></summary>

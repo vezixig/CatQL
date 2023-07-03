@@ -20,13 +20,11 @@ internal class SchemaGenerator : ISourceCodeGenerator
         var sourceClassName = sourceClassType.Name;
         var schemaName = sourceClassName + "Schema";
 
-
         // Create a new compilation
         var compilationUnit = SF.CompilationUnit();
 
-
         // Namespace (with usings)
-        var usingDirectives = CatQlSyntaxFactory.CreateUsings(new[] { "global::GraphQL.Types", "Core.Models", "MediatR", "Queries" });
+        var usingDirectives = CatQlSyntaxFactory.CreateUsings(new[] { "global::GraphQL.Types", "Core.Models", "MediatR", "Mutations", "Queries" });
         var namespaceDeclaration = SF.NamespaceDeclaration(SF.IdentifierName("CatQL.Presentation.GraphQL.Schema"))
             .AddUsings(usingDirectives);
 

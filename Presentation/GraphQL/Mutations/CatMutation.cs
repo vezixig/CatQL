@@ -1,4 +1,4 @@
-﻿namespace CatQL.Presentation.GraphQL.Queries;
+namespace CatQL.Presentation.GraphQL.Mutations;
 
 using Core.Models;
 using global::GraphQL;
@@ -7,7 +7,8 @@ using Infrastructure;
 using MediatR;
 using Types;
 
-public class CatMutation : ObjectGraphType
+/// <summary>GraphQL mutation to create <see cref="Cat" /></summary>
+public class CatMutation : ObjectGraphType<Cat>
 {
     private readonly DataContext _dataContext;
 
@@ -15,7 +16,7 @@ public class CatMutation : ObjectGraphType
         //_dataContext = dataContext;
         => Field<CatOutputType>(
             "addCat",
-            arguments: new QueryArguments(
+            arguments: new(
                 new QueryArgument<NonNullGraphType<CatInputType>> { Name = "cat" }
             ),
             resolve: context =>
