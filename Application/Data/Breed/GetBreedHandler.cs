@@ -1,9 +1,8 @@
-﻿namespace CatQL.Application.Handler;
+﻿namespace CatQL.Application.Data.Breed;
 
 using Core.Models;
 using Infrastructure.Repositories.Interfaces;
 using MediatR;
-using Requests;
 
 internal class GetBreedHandler : IRequestHandler<GetBreedRequest, Breed>
 {

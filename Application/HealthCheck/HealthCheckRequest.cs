@@ -1,4 +1,4 @@
-﻿namespace CatQL.Application.Requests;
+﻿namespace CatQL.Application.HealthCheck;
 
 using MediatR;
 

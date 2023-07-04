@@ -1,6 +1,6 @@
-﻿namespace CatQL.Infrastructure.Health;
+﻿namespace CatQL.Health;
 
-using Application.Requests;
+using Application.HealthCheck;
 using MediatR;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 

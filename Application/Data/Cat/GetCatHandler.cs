@@ -1,9 +1,8 @@
-﻿namespace CatQL.Application.Handler;
+﻿namespace CatQL.Application.Data.Cat;
 
 using Core.Models;
 using Infrastructure.Repositories.Interfaces;
 using MediatR;
-using Requests;
 
 internal class GetCatHandler : IRequestHandler<GetCatRequest, Cat>
 {
@@ -16,8 +15,6 @@ internal class GetCatHandler : IRequestHandler<GetCatRequest, Cat>
     {
         var cat = await _catRepository.GetById(request.Id, cancellationToken);
 
-        if (cat == null) throw new KeyNotFoundException($"No cat with the id {request.Id} was found.");
-
-        return cat;
+        return cat ?? throw new KeyNotFoundException($"No cat with the id {request.Id} was found.");
     }
 }

@@ -12,7 +12,12 @@ internal class CatRepository : ICatRepository
         => _dataContext = dataContext;
 
     public async Task<Cat> GetById(int id, CancellationToken cancellationToken)
-        => await _dataContext.Cats.FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
+        => await _dataContext.Cats
+            .Include(o => o.Breed)
+            .FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
+
+    public async Task<List<Cat>> GetAll(CancellationToken cancellationToken)
+        => await _dataContext.Cats.ToListAsync(cancellationToken);
 
     public async Task<Cat> Create(Cat cat, CancellationToken cancellationToken)
     {

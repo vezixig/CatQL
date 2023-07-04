@@ -1,6 +1,7 @@
 namespace CatQL.Presentation.GraphQL;
 
-using Application.Requests;
+using Application.Data.Breed;
+using Application.Data.Cat;
 using Core.Models;
 using global::GraphQL;
 using global::GraphQL.Types;

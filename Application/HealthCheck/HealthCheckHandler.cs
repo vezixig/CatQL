@@ -1,7 +1,6 @@
-﻿namespace CatQL.Application.Handler;
+﻿namespace CatQL.Application.HealthCheck;
 
 using MediatR;
-using Requests;
 
 internal class HealthCheckHandler : IRequestHandler<HealthCheckRequest>
 {

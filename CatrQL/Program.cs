@@ -1,10 +1,9 @@
 using CatQL.Application;
 using CatQL.Core;
+using CatQL.Health;
 using CatQL.Infrastructure;
-using CatQL.Infrastructure.Health;
 using CatQL.Presentation;
 using HealthChecks.UI.Client;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +25,6 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 //app.MapControllers();
 app.UseGraphQL();
-app.MapHealthChecks("_health", new HealthCheckOptions { ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse });
+app.MapHealthChecks("_health", new() { ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse });
 
 app.Run();
